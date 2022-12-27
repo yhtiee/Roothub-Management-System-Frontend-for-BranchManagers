@@ -1,0 +1,84 @@
+.login_wrapper{
+    display: flex;
+}
+
+.login{
+    width: 50%;
+    height: 43.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -3rem;
+}
+
+.login_hero{
+    width: 50%;
+    background-color: #06046F;
+    height: 43.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display_photo{
+    width: 100%;
+}
+
+.motto{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: x-large;
+}
+
+.help_text{
+    font-size: xx-large;
+    color: #06046F;
+    font-weight: bolder;
+}
+
+/* label{
+    font-size: larger;
+} */
+
+.password_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.username_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.login_form > div > input{
+    width: 20rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: #FAFAFA;
+    font-size: large;
+}
+
+.login_form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login_btn{
+    background-color: #06046F;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.login_btn:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,80 @@
+.listTrainees{
+    display: flex;
+    width: 100%;
+
+    .listTraineesContainer{
+        flex: 6;
+
+        h4{
+            margin-left: 20px;
+            color: #888;
+        }
+    }
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button{
+        margin-right: 50px;
+        padding: 10px;
+        border: none;
+        background-color: teal;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.actions{
+    display: flex;
+    gap: 0.5rem;
+
+    .delete{
+        padding: 10px;
+        border-radius: 5px;
+        background-color: white;
+        color: crimson;
+        cursor: pointer;
+        border: 1px dotted rgba(220, 20, 60, 0.6);
+        
+
+    }
+
+    .view{
+        padding: 10px;
+        border-radius: 5px;
+        background-color: white;
+        color: blue;
+        cursor: pointer;
+        border: 1px dotted rgba(0,0,139,0.596);
+        
+
+    }
+    
+    .edit{
+        padding: 10px;
+        border-radius: 5px;
+        background-color: white;
+        color: green;
+        border: 1px dotted darkgreen;
+        cursor: pointer;
+    }
+
+    .move{
+        padding: 10px;
+        border-radius: 5px;
+        background-color: white;
+        color: goldenrod;
+        border: 1px dotted darkgoldenrod;
+        cursor: pointer;
+    }
+}
+
+.cellImage{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}

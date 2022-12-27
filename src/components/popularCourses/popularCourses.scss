@@ -1,0 +1,45 @@
+.popularCourses{
+    margin-left: 20px;
+    margin-right: 25px;
+
+    padding: 10px;
+
+    .title{
+        width: 100%;
+        // text-align: center;
+        color: #888;
+        
+    }
+
+   
+
+    .courses{
+        // background-color: red;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        
+        .course{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 13rem;
+            height: 6rem;
+            color: #888;
+            // padding: 10px;
+            box-shadow: 2px 4px 10px 1px rgba(201,201, 201, 0.47);
+
+
+
+            .progress{
+                height: 50px;
+                
+            }
+        }
+    }
+    
+}
