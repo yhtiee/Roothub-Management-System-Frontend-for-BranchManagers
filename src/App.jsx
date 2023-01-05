@@ -23,6 +23,7 @@ import { TotalDataProvider } from "./context/TotalData";
 import ListTrainer from "./pages/listTrainer/ListTrainer";
 import Trainer from "./pages/trainer/Trainer";
 import NewTrainer from "./pages/newTrainer/NewTrainer";
+import EditTrainer from "./pages/editTrainer/EditTrainer";
 
 
 function App() {
@@ -49,9 +50,11 @@ function App() {
                       <Route path="/trainee" element = {<PrivateRoute><Trainee/></PrivateRoute>} />
                       <Route path="/editTrainee" element = {<PrivateRoute><EditTrainee/></PrivateRoute>} />
                       
-                      <Route path="/trainers" element = {<ListTrainer/>} />
-                      <Route path="/newTrainer" element = {<NewTrainer/>} />
-                      <Route path="/trainer" element = {<Trainer/>} />
+                      <Route path="/trainers" element = {<PrivateRoute><ListTrainer/></PrivateRoute>} />
+                      <Route path="/newTrainer" element = {<PrivateRoute><NewTrainer/></PrivateRoute>} />
+                      <Route path="/trainer" element = {<PrivateRoute><Trainer/></PrivateRoute>} />
+                      <Route path="/editTrainer" element = {<PrivateRoute><EditTrainer/></PrivateRoute>} />
+
                   </Routes>
                   </TotalDataProvider>
                 </UpdateProvider>

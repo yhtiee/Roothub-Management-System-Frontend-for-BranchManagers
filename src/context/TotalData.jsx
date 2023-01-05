@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { createContext, useState, useEffect } from "react";
+import API_URL from './API.JSX';
 
 const DataContext = createContext()
 
@@ -12,13 +13,12 @@ export const TotalDataProvider = ({children}) => {
     let [totalAlumni, setTotalAlumni] = useState(null)
     let [totalTrainee, setTotalTrainee] = useState(null)
     let [totalTrainer, setTotalTrainer] = useState(null)
-
-
-    
-
+    let [totalIntern, setTotalIntern] = useState(null)
+    let [totalRoles, setTotalRoles] = useState(null)
+    let [totalNYSC, setTotalNYSC] = useState(null)
+ 
    async function getTotalAlumni(user){
-
-    let response = await fetch ("http://127.0.0.1:8000/alumni/total_alumni_location/", {  
+    let response = await fetch (`${API_URL}alumni/total_alumni_location/`, {  
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -42,8 +42,7 @@ export const TotalDataProvider = ({children}) => {
    } 
 
    async function getTotalTrainee(user){
-
-    let response = await fetch ("http://127.0.0.1:8000/trainees/total_trainee_location/", {  
+    let response = await fetch (`${API_URL}trainees/total_trainee_location/`, {  
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -67,8 +66,7 @@ export const TotalDataProvider = ({children}) => {
    } 
 
    async function getTotalTrainer(user){
-
-    let response = await fetch ("http://127.0.0.1:8000/trainers/total_trainer_location/", {  
+    let response = await fetch (`${API_URL}trainers/total_trainer_location/`, {  
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -89,7 +87,81 @@ export const TotalDataProvider = ({children}) => {
         setError("Invalid Username or Password")
 
     }
-   } 
+   }
+
+   async function getTotalInterns(user){
+    let response = await fetch (`${API_URL}interns/total_intern_location/`, {  
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': user})
+    })
+    // console.log(response)
+    if (response.ok){
+        let data = await response.json()
+        if(response.status === 200){
+            SetSuccess("Successfully Logged In")
+            setTotalIntern(data)
+        }
+        // console.log(data)
+    }
+    else{
+        console.log("error")
+        setError("Invalid Username or Password")
+
+    }
+   }
+
+   async function getTotalRoles(user){
+    let response = await fetch (`${API_URL}other_roles/total_other_roles_location/`, {  
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': user})
+    })
+    // console.log(response)
+    if (response.ok){
+        let data = await response.json()
+        if(response.status === 200){
+            SetSuccess("Successfully Logged In")
+            setTotalRoles(data)
+        }
+        // console.log(data)
+    }
+    else{
+        console.log("error")
+        setError("Invalid Username or Password")
+
+    }
+   }
+
+   async function getTotalNYSC(user){
+    let response = await fetch (`${API_URL}NYSC/total_NYSC_location/`, {  
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': user})
+    })
+    // console.log(response)
+    if (response.ok){
+        let data = await response.json()
+        if(response.status === 200){
+            SetSuccess("Successfully Logged In")
+            setTotalNYSC(data)
+        }
+        // console.log(data)
+    }
+    else{
+        console.log("error")
+        setError("Invalid Username or Password")
+
+    }
+   }
+
+
 
 
    let contextData ={
@@ -98,7 +170,13 @@ export const TotalDataProvider = ({children}) => {
     getTotalTrainee : getTotalTrainee,
     totalTrainee : totalTrainee,
     getTotalTrainer : getTotalTrainer,
-    totalTrainer : totalTrainer
+    totalTrainer : totalTrainer,
+    getTotalInterns : getTotalInterns,
+    totalIntern : totalIntern,
+    totalRoles: totalRoles,
+    getTotalRoles : getTotalRoles,
+    totalNYSC : totalNYSC,
+    getTotalNYSC : getTotalNYSC
    }
   
   return (

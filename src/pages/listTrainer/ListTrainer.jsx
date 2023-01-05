@@ -15,7 +15,7 @@ const ListTrainer = () => {
     let {trainersList} = useContext(ListContext)
     let {retrievedTrainer} = useContext(RetrieveContext)
     let {retrievedTrainerData} = useContext(RetrieveContext)
-    let {deleteTrainee} = useContext(CreateContext)
+    let {deleteTrainer} = useContext(CreateContext)
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const [showModal, setShowModal] = useState(false);
@@ -31,9 +31,11 @@ const ListTrainer = () => {
     }
   
     function handleModalConfirm() {
-      deleteTrainee(deleteId)
+      deleteTrainer(deleteId)
       getTrainersList(user)
       setShowModal(false);
+      window.location.reload()
+      // getTrainersList(user)
     }
   
     

@@ -13,8 +13,8 @@ import AuthContext from '../../context/authContext';
 const NewTrainees = () => {
 
   const [file, setFile] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState('');
-  const [selectedDuration, setSelectedDuration] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState('Frontend Web Development');
+  const [selectedDuration, setSelectedDuration] = useState('6 Months');
   let {createTrainee} = useContext(CreateContext)
   let navigate = useNavigate()
   let {user} = useContext(AuthContext)
@@ -118,7 +118,7 @@ const NewTrainees = () => {
               </div>
               <div className="formInput">
                 <label>Course</label>
-                <select id="course" name="course" value={selectedCourse} onChange={handleChangeCourse} defaultValue="Frontend Web Development">
+                <select id="course" name="course" value={selectedCourse} onChange={handleChangeCourse}>
                   <option value="Frontend Web Development">Frontend Web Development</option>
                   <option value="Backend Web Development">Backend Web Development</option>
                   <option value="Full Stack Web Development">Full Stack Web Development</option>
@@ -131,7 +131,7 @@ const NewTrainees = () => {
               </div>
               <div className="formInput">
                 <label>Course Duration</label>
-                <select id="course_duration" name="course_duration" value={selectedDuration} onChange={handleChangeDuration} defaultValue="6 Months">
+                <select id="course_duration" name="course_duration" value={selectedDuration} onChange={handleChangeDuration}>
                   <option value="6 Months">6 Months</option>
                   <option value="4 Months">4 Months</option>
                   <option value="3 Months">3 Months</option>
