@@ -7,7 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AuthContext from '../../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Sidebar = () => {
   let {logoutUser} = useContext(AuthContext)
   let navigate = useNavigate()
@@ -29,59 +29,64 @@ const Sidebar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-            <a href="/">
+            <Link to="/">
               <DashboardIcon className='icon'/>
               <span> Dashboard </span>
-            </a>
+            </Link>
           </li>
+          {/* <a href="">
+            <li>
+              <SettingsIcon className='icon'/>
+              <span>Analysis</span>
+            </li>
+          </a> */}
           <p className="title">LIST</p>
           <li>
-            <a href="/trainees">
+            <Link to="/trainees">
               <PersonOutlineOutlinedIcon className='icon'/>
               <span> Trainees </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/trainers">
-            <PersonOutlineOutlinedIcon className='icon'/>
-            <span> Trainers </span>
-            </a>
-          </li>
-          <li>
-            <PersonOutlineOutlinedIcon className='icon'/>
-            <span> Alumni </span>
-          </li>
-          <li>
-            <PersonOutlineOutlinedIcon className='icon'/>
-            <span> NYSC </span>
-          </li>
-          <li>
-            <PersonOutlineOutlinedIcon className='icon'/>
-            <span> Other Roles </span>
-          </li>
-          <li>
+            <Link to="/ListInterns">
             <PersonOutlineOutlinedIcon className='icon'/>
             <span> Interns </span>
+            </Link>
           </li>
-          <p className="title">SERVICES</p>
-          {/* <li>
-            <SettingsIcon className='icon'/>
-            <span> Settings </span>
-          </li>
-          <p className="title"> USER </p>
           <li>
-            <AccountCircleIcon className='icon'/>
-            <span> Profile </span>
+            <Link to="/trainers">
+            <PersonOutlineOutlinedIcon className='icon'/>
+            <span> Trainers </span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/ListNYSC">
+              <PersonOutlineOutlinedIcon className='icon'/>
+              <span> NYSC </span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/alumni">
+            <PersonOutlineOutlinedIcon className='icon'/>
+            <span> Alumni </span>
+            </Link>
+          </li>
+          {/* <li>
+            <PersonOutlineOutlinedIcon className='icon'/>
+            <span> Other Roles </span>
           </li> */}
+          {/* <p className="title">SERVICES</p>
+          <a href="https://web-production-0dc8.up.railway.app/admin/" target="_blank" rel="noreferrer">
+            <li>
+              <SettingsIcon className='icon'/>
+              <span> Admin Panel </span>
+            </li>
+          </a> */}
           <li onClick={handleClick}>
             <ExitToAppIcon className='icon'/>
             <span> Logout </span>
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
       </div>
     </div>
   )

@@ -4,32 +4,38 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import "./newTrainees.scss"
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { useState } from "react";
-import { useRef, useContext } from 'react'
+import { useRef, useContext, useEffect } from 'react'
 import CreateContext from '../../context/CreateData';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
+// import {useToast} from "@chakra-ui/toast"
+
+
 
 
 const NewTrainees = () => {
 
+  // const toast = useToast()
   const [file, setFile] = useState("");
   const [selectedCourse, setSelectedCourse] = useState('Frontend Web Development');
   const [selectedDuration, setSelectedDuration] = useState('6 Months');
+  const [selectedFee, setSelectedFee] = useState(120000);
+
   let {createTrainee} = useContext(CreateContext)
-  let navigate = useNavigate()
+  let {msg} = useContext(CreateContext)
   let {user} = useContext(AuthContext)
 
-
-
-
-
-
+  
   const handleChangeCourse = (event) => {
     setSelectedCourse(event.target.value);
   };
 
   const handleChangeDuration = (event) => {
     setSelectedDuration(event.target.value);
+  };
+
+  const handleChangeFee = (event) => {
+    setSelectedFee(event.target.value);
   };
 
   let first = useRef()
@@ -44,6 +50,7 @@ const NewTrainees = () => {
 
   let submitForm = (e) => {
     e.preventDefault()
+    // const Imagefile = new File([PH], PH);
     let firstName = first.current.value
     let lastName = last.current.value
     let otherName = other.current.value
@@ -54,8 +61,9 @@ const NewTrainees = () => {
     let Duration = selectedDuration
     let Location = location.current.value
     let Course = selectedCourse
+    let Fee = selectedFee
     let mypic = myfile.current.value
-    let pic = URL.createObjectURL(file)
+    // let pic = URL.createObjectURL(file)
     let formData = new FormData();
     formData.append("profile_picture", file);
     formData.append('first_name', firstName);
@@ -68,12 +76,10 @@ const NewTrainees = () => {
     formData.append("amount_paid", amountPaid);
     formData.append("balance", Balance);
     formData.append("location", Location);
+    formData.append("training_fee", Fee);
     createTrainee(formData)
-    navigate("/trainees")
-   
   }
 
- 
   return (
     <div className='new'>
       <Sidebar/>
@@ -118,7 +124,7 @@ const NewTrainees = () => {
               </div>
               <div className="formInput">
                 <label>Course</label>
-                <select id="course" name="course" value={selectedCourse} onChange={handleChangeCourse}>
+                <select id="course" name="course" value={selectedCourse} onChange={handleChangeCourse} >
                   <option value="Frontend Web Development">Frontend Web Development</option>
                   <option value="Backend Web Development">Backend Web Development</option>
                   <option value="Full Stack Web Development">Full Stack Web Development</option>
@@ -127,6 +133,9 @@ const NewTrainees = () => {
                   <option value="Data Analysis">Data Analysis</option>
                   <option value="App Developement">App Developement</option>
                   <option value="Computer Basics">Computer Basics</option>
+                  <option value="Video Editing">Video Editing</option>
+                  <option value="Photography">Photography</option>
+                  <option value="Content Development">Content Development</option>
                 </select>
               </div>
               <div className="formInput">
@@ -136,6 +145,16 @@ const NewTrainees = () => {
                   <option value="4 Months">4 Months</option>
                   <option value="3 Months">3 Months</option>
                   <option value="1 Month">1 Month</option>
+                </select>
+              </div>
+              <div className="formInput">
+                <label>Training Fee</label>
+                <select id="training_fee" name="training_fee" value={selectedFee} onChange={handleChangeFee}>
+                  <option value="120000">120000</option>
+                  <option value="150000">150000</option>
+                  <option value="180000">180000</option>
+                  <option value="130000">130000</option>
+                  <option value="40000">40000</option>
                 </select>
               </div>
               <div className="formInput" style={{display:"none"}}>

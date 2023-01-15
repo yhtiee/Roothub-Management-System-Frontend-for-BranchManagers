@@ -16,6 +16,7 @@ const NewTrainer = () => {
   let {createTrainer} = useContext(CreateContext)
   let navigate = useNavigate()
   let {user} = useContext(AuthContext)
+  // let user = "Uyo"
 
   const handleChangeCourse = (event) => {
     setSelectedCourse(event.target.value);
@@ -61,7 +62,6 @@ const NewTrainer = () => {
     formData.append("account_number", Account);
     formData.append("location", Location);
     createTrainer(formData)
-    navigate("/trainers")
    
   }
   return (

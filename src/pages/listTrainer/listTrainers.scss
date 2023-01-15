@@ -78,3 +78,14 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.loader{
+    margin-left: 20px;
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 50%;
+    color: navy;
+}

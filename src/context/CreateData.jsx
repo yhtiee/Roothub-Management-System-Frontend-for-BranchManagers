@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import API_URL from "./API.JSX";
+// import {useToast} from "@chakra-ui/toast"
+import API_URL from "./API";
 
 
 const CreateContext = createContext()
@@ -9,8 +10,10 @@ export default CreateContext
 
 export const CreateProvider = ({children}) => {
 
-    let [success, SetSuccess] = useState(null)
-    let [error, setError] = useState(null)
+    // let API_URL = "https://web-production-0dc8.up.railway.app/"
+
+    // const toast = useToast()
+    let [msg, SetMsg] = useState(null)
     let navigate = useNavigate()
 
 
@@ -23,37 +26,41 @@ export const CreateProvider = ({children}) => {
         console.log(response)
         if (response.ok){
             let data = await response.json()
-            if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
-                // navigate("/trainees")
+            if(response.status === 201){
+                SetMsg(true)  
+                // toast({
+                //     title: "Trainee Sucessfully created.",
+                //     status: "success",
+                //     duration: 9000,
+                //     isClosable: true,
+                //     colorScheme: "green"
+                // })
+                navigate("/trainees")
+                console.log(data)
             }
-            console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
+            SetMsg(false)
     
         }
     }
 
     async function createTrainer(formData){
-        // console.log(formData)
         let response = await fetch(`${API_URL}trainers/create_trainer/`, {
             method: "POST",
             body: formData
         })
-        console.log(response)
         if (response.ok){
             let data = await response.json()
-            if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
-                // navigate("/trainees")
+            if(response.status === 201){
+                navigate("/trainers")
+
             }
             console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
     
         }
     }
@@ -67,15 +74,16 @@ export const CreateProvider = ({children}) => {
         console.log(response)
         if (response.ok){
             let data = await response.json()
-            if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
+            if(response.status === 201){
                 // navigate("/trainees")
+                navigate("/listInterns")
+
             }
             console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
+            // setError("Error Occured")
     
         }
     }
@@ -89,15 +97,15 @@ export const CreateProvider = ({children}) => {
         console.log(response)
         if (response.ok){
             let data = await response.json()
-            if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
+            if(response.status === 201){
                 // navigate("/trainees")
+                navigate("/listNYSC")
             }
             console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
+            // setError("Error Occured")
     
         }
     }
@@ -112,14 +120,13 @@ export const CreateProvider = ({children}) => {
         if (response.ok){
             let data = await response.json()
             if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
                 // navigate("/trainees")
             }
             console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
+            
     
         }
     }
@@ -134,14 +141,14 @@ export const CreateProvider = ({children}) => {
         if (response.ok){
             let data = await response.json()
             if(response.status === 200){
-                SetSuccess("Successfully Logged In")  
+                SetSuccess("Successfully Created")   
                 // navigate("/trainees")
             }
             console.log(data)
         }
         else{
             console.log("error")
-            setError("Invalid Username or Password")
+            setError("Error Occured")
     
         }
     }
@@ -162,6 +169,8 @@ export const CreateProvider = ({children}) => {
         if (response.ok){
             if(response.status === 204){
                 SetSuccess("Successfully Logged In")  
+                // navigate("/trainees")
+
             }
             // console.log(data)
         }
@@ -295,7 +304,8 @@ export const CreateProvider = ({children}) => {
         deleteAlumni : deleteAlumni,
         deleteIntern : deleteIntern,
         deleteNYSC : deleteNYSC,
-        deleteRoles : deleteRoles
+        deleteRoles : deleteRoles,
+        msg : msg
        }
 
 

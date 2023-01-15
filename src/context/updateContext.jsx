@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { createContext, useState, useEffect } from "react";
-import API_URL from './API.JSX';
+import { useNavigate } from 'react-router-dom';
+import API_URL from './API';
+
 
 const UpdateContext = createContext()
 
@@ -8,6 +10,9 @@ export default UpdateContext
 
 export const UpdateProvider = ({children}) => {
 
+    // let API_URL = "https://web-production-0dc8.up.railway.app/"
+
+    let navigate = useNavigate()
     let [success, SetSuccess] = useState(null)
     let [error, setError] = useState(null)
 
@@ -21,6 +26,7 @@ export const UpdateProvider = ({children}) => {
             let data = await response.json()
             if(response.status === 200){
                 SetSuccess("Successfully Logged In")  
+                navigate("/trainees")
             }
             console.log(data)
         }
@@ -61,6 +67,7 @@ export const UpdateProvider = ({children}) => {
             let data = await response.json()
             if(response.status === 200){
                 SetSuccess("Successfully Logged In")  
+                navigate("/ListInterns")
             }
             console.log(data)
         }

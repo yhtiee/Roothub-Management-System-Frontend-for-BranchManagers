@@ -14,7 +14,12 @@ import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 
 const Trainee = () => {
 
-  let traineeData = JSON.parse(localStorage.getItem("trainee"))
+  let [traineeData, setData] = useState("")
+  
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("trainee"))
+    setData(data)
+  }, [])
 
   return (
     <div  className='trainee'>

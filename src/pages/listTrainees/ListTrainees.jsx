@@ -5,24 +5,26 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import "./listTraines.scss"
 import ListContext from '../../context/ListData';
 import RetrieveContext from '../../context/retrieveContext'
-import { useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import CreateContext from '../../context/CreateData'
 import DeleteConfirmation from '../../components/deleteConfirm/DeleteConfirmation'
+import PH from "../../assets/defaultimage.jpg"
+import LoadingAnimation from '../../components/loading/Loading'
 import AuthContext from '../../context/authContext'
-// import 'react-bootstrap/dist/react-bootstrap.css'
 
-// import { shouldForwardProp } from '@mui/styled-engine'
+
 
 const ListTrainees = () => {
-  // let user = "smart"
 
+  
   let {getTraineesList} = useContext(ListContext)
   let {traineesList} = useContext(ListContext)
+  let {dataFetched} = useContext(ListContext)
   let {retrievedTrainee} = useContext(RetrieveContext)
-  let {retrievedData} = useContext(RetrieveContext)
+  let {retrievedEditTrainee} = useContext(RetrieveContext)
   let {deleteTrainee} = useContext(CreateContext)
+  // let user = "Uyo"
   let {user} = useContext(AuthContext)
-  let navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false)
 
@@ -41,13 +43,17 @@ const ListTrainees = () => {
     setShowModal(false);
   }
 
+  useEffect(() => {
+    getTraineesList(user)
+   }, [handleModalConfirm])
+
   
   let view = (event, params) => {
-    // console.log(params.row.id)
     retrievedTrainee(params.row.id)
-    // navigate(`${params.row.id}`)
-    console.log(retrievedData)
-  
+  }
+
+  let edit = (event, params) => {
+    retrievedEditTrainee(params.row.id)
   }
   
   const columns = [
@@ -60,54 +66,45 @@ const ListTrainees = () => {
           return (
               <>
                 <div className ="imageContainer">
-                  <img className="cellImage" src={params.row.profile_picture} alt="profile" />
+                  <img className="cellImage" src={params.row.profile_picture? params.row.profile_picture: PH } alt="profile" />
                 </div>
               </>
           )
       }
     },
-    { field: 'last_name', headerName: 'Last name', width: 130 },
-    { field: 'first_name', headerName: 'First name', width: 130 },
-    { field: "course_learning", headerName: 'Course', width: 170 },
+    { field: 'last_name', headerName: 'Last name', width: 120 },
+    { field: 'first_name', headerName: 'First name', width: 100},
+    { field: "course_learning", headerName: 'Course', width: 200 },
     {field: "registrationDate", headerName: "Registration Date", width: 130},
+    {field: "training_fee", headerName: "Training Fee", width: 110},
     { field: 'amount_paid', headerName: 'Amount paid', width: 130 },
-    { field: 'balance', headerName: 'Balance', width: 130 },
+    { field: 'balance', headerName: 'Balance', width: 100 },
     {
       field: 'action',
       headerName: 'Actions',
       sortable: false,
-      width: 250,
+      width: 200,
       renderCell: (params) => {
           return (
               <>
                   <div className='actions'>
-                      <a href="/trainee">
+
                         <button onClick={event => view(event, params)} className='view'>
                           View
                         </button>
-                      </a>
                       <button onClick={event => handleDeleteClick(event, params)} className='delete'>
                           Delete
                       </button>
-                      <a href="/editTrainee">
-                        <button onClick={event => view(event, params)} className='edit'>
+                        <button onClick={event => edit(event, params)} className='edit'>
                           Edit
                         </button>
-                      </a>
-                      <button className='move'>
-                          Move
-                      </button>
                   </div>
               </>
           )
       }
     },
   ];
-  
-  
 
-  
-  console.log(traineesList)
 
   useEffect(() => {
    getTraineesList(user)
@@ -122,12 +119,12 @@ const ListTrainees = () => {
         <Navbar/>
         <div className="info">
           <h4> Trainees </h4>
-          <a href="/newTrainee">
+          <Link to="/newTrainee" >
             <button> Add Trainee</button>
-          </a>
+          </Link>
         </div>
         <DeleteConfirmation show={showModal} onHide={handleModalClose} onConfirm={handleModalConfirm}/>
-        <Datatable value={data}/>
+        {!dataFetched? <div className='loader'><LoadingAnimation/></div>:<Datatable value={data}/>}
       </div>
     </div>
   )

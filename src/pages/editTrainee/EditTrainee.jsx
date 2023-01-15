@@ -14,14 +14,15 @@ import AuthContext from '../../context/authContext';
 
 const EditTrainee = () => {
 
+  let traineeData = JSON.parse(localStorage.getItem("trainee"))
   const [file, setFile] = useState("");
   const [ImageFile, setFileImage] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState("Frontend Web Development");
-  const [selectedDuration, setSelectedDuration] = useState("6 Months");
-  let {updateTrainee} = useContext(UpdateContext)
-  let navigate = useNavigate()
-  let traineeData = JSON.parse(localStorage.getItem("trainee"))
+  const [selectedCourse, setSelectedCourse] = useState(traineeData.course_learning);
+  const [selectedDuration, setSelectedDuration] = useState(traineeData.course_duration);
+  const [selectedFee, setSelectedFee] = useState(traineeData.training_fee);
   let {user} = useContext(AuthContext)
+  let {updateTrainee} = useContext(UpdateContext)
+  // let user = "Uyo"
 
   const handleChangeCourse = (event) => {
     setSelectedCourse(event.target.value);
@@ -29,6 +30,10 @@ const EditTrainee = () => {
 
   const handleChangeDuration = (event) => {
     setSelectedDuration(event.target.value);
+  };
+
+  const handleChangeFee = (event) => {
+    setSelectedFee(event.target.value);
   };
 
   let first = useRef()
@@ -66,8 +71,7 @@ const EditTrainee = () => {
     let Duration = selectedDuration
     let Location = location.current.value
     let Course = selectedCourse
-    let mypic = myfile.current.value
-    // let pic = URL.createObjectURL(file)
+    let Fee = selectedFee
     let userId = traineeData.id
     let formData = new FormData();
     formData.append("profile_picture", file? file : ImageFile);
@@ -81,16 +85,10 @@ const EditTrainee = () => {
     formData.append("amount_paid", amountPaid);
     formData.append("balance", Balance);
     formData.append("location", Location);
+    formData.append("training_fee", Fee);
     updateTrainee(formData, userId)
-    navigate("/trainees")
-   
   }
 
-  
-  
-  
-
- 
   return (
     <div className='new'>
       <Sidebar/>
@@ -105,7 +103,7 @@ const EditTrainee = () => {
                 file
                   ? URL.createObjectURL(file)
                   : traineeData.profile_picture
-              } alt="" />
+              } alt="alt"/>
           </div>
           <div className="right">
             <form onSubmit={submitForm} encType="multipart/form-data">
@@ -153,6 +151,16 @@ const EditTrainee = () => {
                   <option value="4 Months">4 Months</option>
                   <option value="3 Months">3 Months</option>
                   <option value="1 Month">1 Month</option>
+                </select>
+              </div>
+              <div className="formInput">
+                <label>Training Fee</label>
+                <select id="training_fee" name="training_fee" value={selectedFee} onChange={handleChangeFee}>
+                  <option value="120000">120000</option>
+                  <option value="150000">150000</option>
+                  <option value="180000">180000</option>
+                  <option value="130000">130000</option>
+                  <option value="40000">40000</option>
                 </select>
               </div>
               <div className="formInput" style={{display:"none"}}>

@@ -19,6 +19,7 @@ const EditTrainer = () => {
   let navigate = useNavigate()
   let trainerData = JSON.parse(localStorage.getItem("trainer"))
   let {user} = useContext(AuthContext)
+  // let user = "Uyo"
 
   const handleChangeCourse = (event) => {
     setSelectedCourse(event.target.value);
